@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Create or Edit";
+}
+
+@model StoreInventory.Models.Item
+
+<div class="text-center">
+    <h1> Create a new item</h1>
+</div>
+<form asp-action="CreateEditExpenseForm" class="form">
+    <input hidden class="form-control" type="number" asp-for="Id" />
+    <label class="mt-4"> Name</label>
+    <input class="form-control" type="text" asp-for="Name" />
+    <label class="mt-4"> Item type</label>
+    <input class="form-control" type="number" asp-for="ItemType" step="1" />
+    <label class="mt-4"> Description </label>
+    <textarea class="form-control" asp-for="Description"> </textarea>
+    <label class="mt-4"> Price</label>
+    <input class="form-control" type="number" asp-for="Price" step="0.01" />
+    <label class="mt-4"> Amount</label>
+    <input class="form-control" type="number" asp-for="Amount" step="1" />
+
+    <button class="text-center btn btn-primary mt-4" type="submit"> Save</button>
+
+
+</form>
