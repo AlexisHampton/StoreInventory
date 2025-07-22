@@ -2,37 +2,25 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model StoreInventory.Models.Item
+@model List<Item>
 
 <div class="text-center">
     <a class="btn btn-primary mb-5" asp-controller="Home" asp-action="CreateAndEdit"> Create New Item </a>
     <!-- Items  -->
     <div class="container text-center mt-10">
         <div class="row row-cols-5 d-flex justify-content-around">
-            <div class="col bg-info m-2 p-2">
-                <h2> Name </h2>
-                <h4> Description </h4>
-                <p> Price</p>
-                <p> Item type</p>
-            </div>
-            <div class="col bg-info m-2 p-2">
-                <h2> Name </h2>
-                <h4> Description </h4>
-                <p> Price</p>
-                <p> Item type</p>
-            </div>
-            <div class="col bg-info m-2  p-2">
-                <h2> Name </h2>
-                <h4> Description </h4>
-                <p> Price</p>
-                <p> Item type</p>
-            </div>
-            <div class="col bg-info m-2 p-2">
-                <h2> Name </h2>
-                <h4> Description </h4>
-                <p> Price</p>
-                <p> Item type</p>
-            </div>
+            @{
+                foreach (var item in Model)
+                {
+                    <div class="col bg-info m-2 p-2">
+                        <h2> @item.Name </h2>
+                        <h4> @item.Description </h4>
+                        <p> @item.Price</p>
+                        <p> @item.ItemType</p>
+                    </div>
+                }
+            }
+
         </div>
     </div>
 

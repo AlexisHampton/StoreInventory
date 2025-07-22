@@ -1,9 +1,15 @@
+using StoreInventory.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+var connString = builder.Configuration.GetConnectionString("StoreInventory");
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSqlite<StoreInventoryContext>(connString);
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -25,5 +31,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+app.MigrateDb();
 
 app.Run();
