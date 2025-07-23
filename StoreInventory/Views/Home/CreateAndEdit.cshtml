@@ -2,7 +2,7 @@
     ViewData["Title"] = "Create or Edit";
 }
 
-@model StoreInventory.Models.Item
+@model StoreInventory.Models.ItemForViewing
 
 <div class="text-center">
     <h1> Create a new item</h1>
@@ -12,7 +12,16 @@
     <label class="mt-4"> Name</label>
     <input class="form-control" type="text" asp-for="Name" />
     <label class="mt-4"> Item type</label>
-    <input class="form-control" type="number" asp-for="ItemType" step="1" />
+    <div class="d-flex justify-content-start btn-group" role="group">
+        <input type="radio" class="btn-check " asp-for="Type" value="Ingredient" autocomplete="off" id="Ingredient"
+            checked />
+        <label for="Ingredient" class="btn btn-outline-primary"> Ingredient</label>
+        <input type="radio" asp-for="Type" class="btn-check" value="Pastry" autocomplete="off" id="Pastry" />
+        <label for="Pastry" class="btn btn-outline-primary"> Pastry</label>
+        <input type="radio" asp-for="Type" class="btn-check" value="Beverage" autocomplete="off" id="Beverage" />
+        <label for="Beverage" class="btn btn-outline-primary"> Beverage</label>
+    </div>
+
     <label class="mt-4"> Description </label>
     <textarea class="form-control" asp-for="Description"> </textarea>
     <label class="mt-4"> Price</label>

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using StoreInventory.Data;
+using StoreInventory.Mappings;
 using StoreInventory.Models;
 
 namespace StoreInventory.Controllers;
@@ -20,22 +21,27 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         var allItems = _context.Items.ToList();
-        return View(allItems);
+        List<ItemForViewing> itemForViewings = new();
+        foreach (var item in allItems)
+            itemForViewings.Add(item.ToView(_context));
+        return View(itemForViewings);
     }
 
     public IActionResult CreateAndEdit()
     {
-
+        var allTypes = _context.ItemTypes.ToList().Select(type => type.Type);
+        ViewBag.AllTypes = allTypes;
         return View();
     }
 
-    public IActionResult CreateEditExpenseForm(Item model)
+    public IActionResult CreateEditExpenseForm(ItemForViewing model)
     {
+        Item item = model.ToItem(_context);
         //if no model, create one
         if (model.Id == 0)
-            _context.Add(model);
+            _context.Add(item);
         else
-            _context.Items.Update(model);
+            _context.Items.Update(item);
         _context.SaveChanges();
         return RedirectToAction("Index");
     }
