@@ -53,10 +53,16 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
-
-    public IActionResult Privacy()
+    public IActionResult Delete(int? id)
     {
-        return View();
+        var item = _context.Items.Find(id);
+        if (item is not null)
+        {
+            _context.Remove(item);
+            _context.SaveChanges();
+        }
+
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
