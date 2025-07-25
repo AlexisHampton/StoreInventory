@@ -27,10 +27,17 @@ public class HomeController : Controller
         return View(itemForViewings);
     }
 
-    public IActionResult CreateAndEdit()
+    public IActionResult CreateAndEdit(int? id)
     {
         var allTypes = _context.ItemTypes.ToList().Select(type => type.Type);
         ViewBag.AllTypes = allTypes;
+
+        //If editing an exisitng item
+        if (id is not null)
+        {
+            var item = _context.Items.Find(id);
+            return View(item!.ToView(_context));
+        }
         return View();
     }
 

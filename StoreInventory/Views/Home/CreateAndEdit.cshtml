@@ -5,7 +5,16 @@
 @model StoreInventory.Models.ItemForViewing
 
 <div class="text-center">
-    <h1> Create a new item</h1>
+    @{
+        if (Model is not null)
+        {
+            <h1> Edit item</h1>
+        }
+        else
+        {
+            <h1> Create a new item</h1>
+        }
+    }
 </div>
 <form asp-action="CreateEditExpenseForm" class="form">
     <input hidden class="form-control" type="number" asp-for="Id" />
@@ -29,7 +38,16 @@
     <label class="mt-4"> Amount</label>
     <input class="form-control" type="number" asp-for="Amount" step="1" />
 
-    <button class="text-center btn btn-primary mt-4" type="submit"> Save</button>
+    @{
+        if (Model is not null)
+        {
+            <button class="text-center btn btn-primary mt-4" type="submit"> Save</button>
+        }
+        else
+        {
+            <button class="text-center btn btn-primary mt-4" type="submit"> Create</button>
+        }
+    }
 
 
 </form>

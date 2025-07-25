@@ -12,12 +12,19 @@
             @{
                 foreach (var item in Model)
                 {
+
                     <div class="col bg-info m-2 p-2">
                         <h2> @item.Name x @item.Amount </h2>
                         <h4> @item.Description </h4>
                         <p> @item.Type</p>
                         <p> @item.Price sapphire</p>
+                        <div>
+                            <a class="btn btn-primary" asp-controller="Home" asp-action="CreateAndEdit" asp-route-id="@item.Id">
+                                Edit
+                            </a>
+                        </div>
                     </div>
+
                 }
             }
 
